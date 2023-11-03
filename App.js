@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import UserListScreen from './screens/UserListScreen';
+import EditUserScreen from './screens/EditUserScreen';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Sign in">
+      <Stack.Navigator initialRouteName="SignIn">
         <Stack.Screen name="SignIn" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="UserListScreen" component={UserListScreen} />
+        <Stack.Screen name="EditUserScreen" component={EditUserScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -30,10 +34,11 @@ function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    fetch('http://192.168.100.8/uniexpo/signin.php', {
-      // 192.168.100.8 it is your PC ip  
+    fetch('http://192.168.0.108/uniexpo/signin.php', {
+      
+      // 192.168.0.108 it is your PC ip  
       //  go to your terminal of PC type ipconfig and look ip4 ip and paste here 
-      // IPv4 Address. . . . . . . . . . . : 192.168.100.8
+      // IPv4 Address. . . . . . . . . . . : 192.168.0.108
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -51,7 +56,7 @@ function LoginScreen({ navigation }) {
           alert('Sign-in successfully');
           setEmail('')
           setPassword('')
-          navigation.navigate('Home');
+          navigation.navigate('UserListScreen');
         }
         else {
           alert('Invalid email or password');
@@ -145,10 +150,10 @@ function SignUpScreen({ navigation }) {
   const [password, setPassword] = useState('');
 
   const handleSignUp = () => {
-    fetch('http://192.168.100.8/uniexpo/signup.php', {
-      // 192.168.100.8 it is your PC ip  
+    fetch('http://192.168.0.108/uniexpo/signup.php', {
+      // 192.168.0.108 it is your PC ip  
       //  go to your terminal of PC type ipconfig and look ip4 ip and paste here 
-      // IPv4 Address. . . . . . . . . . . : 192.168.100.8
+      // IPv4 Address. . . . . . . . . . . : 192.168.0.108
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -190,7 +195,6 @@ function SignUpScreen({ navigation }) {
       </Text>
 
       <View style={styles.spacer} />
-
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -284,3 +288,68 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+
+
+// import { useEffect, useState } from 'react'
+// import { FlatList, StyleSheet, Text, View } from 'react-native'
+
+
+// const App = () => {
+//   const [data, setData] = useState([]);
+
+//   useEffect(() => {
+//     fetchAPI();
+//   }, [])
+
+//   const fetchAPI = () => {
+//     fetch('http://10.0.2.2:8000/api/fetchapi')
+//       // 10.0.2.2:8000 PC or Emulator 
+//       .then((res) => res.json())
+//       .then((resdata) => {
+//         setData(resdata)
+//       })
+//   }
+
+//   return (
+//     <View>
+//       <Text style={{ marginTop: 20, fontSize: 30, textAlign: 'center' }}>API Fetch Data</Text>
+//       <FlatList
+//         data={data}
+//         renderItem={({ item }) => {
+//           return (
+//             <View>
+//               <Text style={{fontSize:18}}>{item.email}</Text>
+//               <Text style={{fontSize:18}}>{item.password}</Text>
+//             </View>
+//           )
+//         }}
+//       />
+//     </View>
+//   )
+// }
+
+// export default App
+
+// const styles = StyleSheet.create({})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
